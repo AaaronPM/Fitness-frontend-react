@@ -1,22 +1,45 @@
-import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 export default function Routines({ routines }) {
   if (!routines) return <h1>Loading</h1>
 
   return (
-    <>
+    <div className='d-flex gap-3'>
       {routines &&
         routines.map((routine, idx) => {
           console.log('routine -->', routine)
           return (
-            <Container
+            <Card
               key={routine.id}
-              className='d-flex border flex-column gap-3 p-3 m-2'
+              style={{ width: '18em' }}
+              className='d-flex flex-column'
             >
-              <h1>{routine.name}</h1>
-              <h4>{routine.goal}</h4>
-            </Container>
+              <Card.Header>{routine.name}</Card.Header>
+              <Card.Body>
+                <Card.Title>Creator: {routine.creatorName}</Card.Title>
+                <Card.Text className='p-0 m-0'>Goal:</Card.Text>
+                <Card.Text>{routine.goal}</Card.Text>
+                <Card.Text className='p-0 m-0'>Related Activities:</Card.Text>
+                {routine.activities.length > 0 ? (
+                  routine.activities.map((activity) => {
+                    return (
+                      <div key={activity.id} className='ps-3'>
+                        <ul className='list-unstyled p-0 m-0'>
+                          <li>{activity.name}</li>
+                        </ul>
+                      </div>
+                    )
+                  })
+                ) : (
+                  <div>
+                    <span className='ps-3'>
+                      No activites linked to this routine
+                    </span>
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
           )
         })}
-    </>
+    </div>
   )
 }
