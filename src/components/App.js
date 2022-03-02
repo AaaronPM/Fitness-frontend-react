@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Header />
+      <Header token={token} />
       <div className='content-container d-flex justify-content-center'>
         <Routes>
           <Route path='/' element={<h1>Home</h1>} />
