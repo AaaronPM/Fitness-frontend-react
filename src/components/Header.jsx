@@ -1,5 +1,7 @@
-import { Container, Navbar, Nav } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import { LinkContainer } from 'react-router-bootstrap'
 import './Header.css'
 
 export default function Header(props) {
@@ -9,12 +11,26 @@ export default function Header(props) {
         bg='dark'
         variant='dark'
         className='mw-100 d-flex justify-content-between'
+        fixed='top'
       >
-        <Navbar.Brand className='m-0 mx-3 fs-1'>Fitness Tracker</Navbar.Brand>
+        <LinkContainer to='/'>
+          <Navbar.Brand className='m-0 px-4 mx-3 fs-1 rounded-pill fitness-title'>
+            Fitness Tracker
+          </Navbar.Brand>
+        </LinkContainer>
         <Nav className='me-3 fs-4'>
+          {/* later change to NavLink for react-router-dom 
+              may have to download react-router-bootstrap
+              to make this nav set up a bit cleaner
+            */}
+          <LinkContainer to='/'>
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
           <Nav.Link>Routines</Nav.Link>
           <Nav.Link>Activities</Nav.Link>
-          <Nav.Link>Log In</Nav.Link>
+          {/*when Logged in the log in tab turns into My Routines */}
+          <Nav.Link>Profile</Nav.Link>
+          {/* <Nav.Link>Log in</Nav.Link> */}
         </Nav>
       </Navbar>
     </Container>
