@@ -5,7 +5,7 @@ const BASE_URL = 'https://polar-brook-78087.herokuapp.com/api'
 export const fetchRoutines = async () => {
   try {
     const { data } = await axios.get(`${BASE_URL}/routines`)
-    console.log('data :>> ', data)
+    console.log('Routines data :>> ', data)
     return data
   } catch (error) {
     console.error(error)
@@ -31,11 +31,21 @@ export const getUser = async (token) => {
   return data
 }
 
-export const createRoutines = async(token,routineObj) => {
-  const {data} = await axios.post(`${BASE_URL}/routines`,routineObj,{
-    headers:{
-      Authorization: `Bearer ${token}`
-    }
+export const createRoutines = async (token, routineObj) => {
+  const { data } = await axios.post(`${BASE_URL}/routines`, routineObj, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   })
   return data
-};
+}
+
+export const fetchActivities = async () => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/activities`)
+    console.log('Activities data :>> ', data)
+    return data
+  } catch (err) {
+    console.error(err)
+  }
+}
