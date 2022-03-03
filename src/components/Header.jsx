@@ -1,10 +1,13 @@
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import './Header.css'
 
-export default function Header({ token }) {
+export default function Header({ token, setToken, setUser }) {
+  const navigate = useNavigate()
   return (
     <Container className='head mw-100 p-0'>
       <Navbar
@@ -35,6 +38,18 @@ export default function Header({ token }) {
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
           )}
+          {token ? (
+            <Button
+              onClick={() => {
+                localStorage.removeItem('token')
+                setToken('')
+                setUser({})
+                navigate('/')
+              }}
+            >
+              LogOut
+            </Button>
+          ) : null}
         </Nav>
       </Navbar>
     </Container>

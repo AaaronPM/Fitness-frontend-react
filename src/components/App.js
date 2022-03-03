@@ -4,9 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import Header from './Header'
 import Routines from './Routines'
+import Login from './Login'
+import Activities from './Activities'
 import CreateRoutine from './CreateRoutine'
 import { fetchActivities, fetchRoutines, getUser } from '../api'
-import Activities from './Activities'
 
 function App() {
   const [user, setUser] = useState({})
@@ -17,7 +18,7 @@ function App() {
 
   useEffect(() => {
     fetchRoutines().then((allRoutines) => setRoutines(allRoutines))
-    fetchActivities().then((allActivities)=>setActivities(allActivities))
+    fetchActivities().then((allActivities) => setActivities(allActivities))
   }, [])
 
   useEffect(() => {
@@ -39,14 +40,29 @@ function App() {
 
   return (
     <div className='App'>
-      <Header token={token} />
+      <Header token={token} setToken={setToken} setUser={setUser} />
       <div className='content-container d-flex justify-content-center'>
         <Routes>
           <Route path='/' element={<h1>Home</h1>} />
-          <Route path='/routines' element={<Routines routines={routines} />} />
-          <Route path='/routines/create-routine' element={<CreateRoutine routines={routines} setRoutines={setRoutines} token={token}/>} />
-          <Route path='/activities' element={<Activities user={user} activities={activities} setActivities={setActivities}/>} />
-          <Route path='/login' element={<h1>Login</h1>} />
+          <Route
+            path='/routines'
+            element={<Routines token={token} routines={routines} />}
+          />
+          <Route
+            path='/routines/create-routine'
+            element={
+              <CreateRoutine
+                routines={routines}
+                setRoutines={setRoutines}
+                token={token}
+              />
+            }
+          />
+          <Route
+            path='/activities'
+            element={<Activities user={user} activities={activities} />}
+          />
+          <Route path='/login' element={<Login setToken={setToken} />} />
           <Route path='/myRoutines' element={<h1>MyRoutines</h1>} />
         </Routes>
       </div>
