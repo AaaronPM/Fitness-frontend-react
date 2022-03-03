@@ -3,11 +3,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { LinkContainer } from 'react-router-bootstrap'
 import './Header.css'
-import { useEffect } from 'react'
 
-export default function Header({ userInfo }) {
-  console.log('userInfo :>> ', userInfo);
-  
+export default function Header({ token }) {
   return (
     <Container className='head mw-100 p-0'>
       <Navbar
@@ -29,7 +26,7 @@ export default function Header({ userInfo }) {
           <LinkContainer to='activities'>
             <Nav.Link>Activities</Nav.Link>
           </LinkContainer>
-          {userInfo.id ? (
+          {token ? (
             <LinkContainer to='myRoutines'>
               <Nav.Link>My Routines</Nav.Link>
             </LinkContainer>
