@@ -30,3 +30,12 @@ export const getUser = async (token) => {
   })
   return data
 }
+
+export const createRoutines = async(token,routineObj) => {
+  const {data} = await axios.post(`${BASE_URL}/routines`,routineObj,{
+    headers:{
+      Authorization: `Bearer ${token}`
+    }
+  })
+  return data
+};
