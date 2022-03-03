@@ -20,7 +20,7 @@ export default function RoutineCards({ routines }) {
                 <Card.Text className='p-0 m-0 mb-2 fs-5 fw-bold'>
                   Activities:
                 </Card.Text>
-                {routine.activities.length > 0 ? (
+                {routine?.activities?.length > 0 ? (
                   <div className='d-flex gap-2 justify-content-center'>
                     <ActivityCards activities={routine.activities} />
                   </div>

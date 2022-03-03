@@ -42,7 +42,7 @@ function App() {
         <Routes>
           <Route path='/' element={<h1>Home</h1>} />
           <Route path='/routines' element={<Routines routines={routines} />} />
-          <Route path='/routines/create-routine' element={<CreateRoutine />} />
+          <Route path='/routines/create-routine' element={<CreateRoutine routines={routines} setRoutines={setRoutines} token={token}/>} />
           <Route path='/activities' element={<h1>Activities</h1>} />
           <Route path='/login' element={<h1>Login</h1>} />
           <Route path='/myRoutines' element={<h1>MyRoutines</h1>} />
