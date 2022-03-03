@@ -12,7 +12,7 @@ export const fetchRoutines = async () => {
   }
 }
 
-export const login = async (loginObj) => {
+export const loginUser = async (loginObj) => {
   try {
     const {
       data: { token },
