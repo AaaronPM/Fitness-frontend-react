@@ -5,17 +5,19 @@ import './App.css'
 import Header from './Header'
 import Routines from './Routines'
 import CreateRoutine from './CreateRoutine'
-import { fetchRoutines, getUser } from '../api'
+import { fetchActivities, fetchRoutines, getUser } from '../api'
+import Activities from './Activities'
 
 function App() {
   const [user, setUser] = useState({})
   const [routines, setRoutines] = useState([])
-  // const [activites, setActivities] = useState([])
+  const [activities, setActivities] = useState([])
   const [token, setToken] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
     fetchRoutines().then((allRoutines) => setRoutines(allRoutines))
+    fetchActivities().then((allActivities)=>setActivities(allActivities))
   }, [])
 
   useEffect(() => {
@@ -43,7 +45,7 @@ function App() {
           <Route path='/' element={<h1>Home</h1>} />
           <Route path='/routines' element={<Routines routines={routines} />} />
           <Route path='/routines/create-routine' element={<CreateRoutine routines={routines} setRoutines={setRoutines} token={token}/>} />
-          <Route path='/activities' element={<h1>Activities</h1>} />
+          <Route path='/activities' element={<Activities user={user} activities={activities} setActivities={setActivities}/>} />
           <Route path='/login' element={<h1>Login</h1>} />
           <Route path='/myRoutines' element={<h1>MyRoutines</h1>} />
         </Routes>
