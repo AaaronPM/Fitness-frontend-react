@@ -41,7 +41,7 @@ function App() {
   return (
     <div className='App'>
       <Header token={token} setToken={setToken} setUser={setUser} />
-      <div className='content-container d-flex justify-content-center'>
+      <div className='content-container d-flex justify-content-center mb-5'>
         <Routes>
           <Route path='/' element={<h1>Home</h1>} />
           <Route
