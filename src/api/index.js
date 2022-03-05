@@ -49,3 +49,11 @@ export const fetchActivities = async () => {
     console.error(err)
   }
 }
+
+export const registerUser = async (registerObj) => {
+  try {
+    await axios.post(`${BASE_URL}/users/register`, registerObj)
+  } catch (err) {
+    console.error(err)
+  }
+}
