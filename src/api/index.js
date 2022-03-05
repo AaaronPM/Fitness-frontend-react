@@ -110,15 +110,11 @@ export const editRoutineActivity = async (
 
 export const editRoutine = async (token, id, routineObj) => {
   try {
-    const res = await axios.patch(
-      `${BASE_URL}/rountine_activities/${id}`,
-      routineObj,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    const res = await axios.patch(`${BASE_URL}/routines/${id}`, routineObj, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     console.log('res :>> ', res)
   } catch (error) {
     console.error(error)

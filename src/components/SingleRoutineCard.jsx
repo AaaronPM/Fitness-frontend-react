@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import ActivityCards from './ActivityCards'
 import { deleteRoutine, fetchRoutines } from '../api'
+import EditRoutineModal from './EditRoutineModal'
 
 export default function SingleRoutineCard({
   token,
@@ -12,6 +13,7 @@ export default function SingleRoutineCard({
   user,
 }) {
   const [routine, setRoutine] = useState({})
+  const [modalShow, setModalShow] = useState(false)
   const { routineId } = useParams()
   const navigate = useNavigate()
   const { pathname } = useLocation()
@@ -44,7 +46,7 @@ export default function SingleRoutineCard({
           <Card.Text className='fst-italic'>
             Routine Creator: {routine.creatorName}
           </Card.Text>
-          <Button>Edit</Button>
+          <Button onClick={() => setModalShow(true)}>Edit</Button>
           <Button onClick={deleteHandler}>Delete</Button>
           <Card.Text className='p-0 m-0 mb-2 fs-5 fw-bold'>
             Activities:
@@ -66,6 +68,13 @@ export default function SingleRoutineCard({
           )}
         </Card.Body>
       </Card>
+      <EditRoutineModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        routine={routine}
+        setRoutines={setRoutines}
+        token={token}
+      />
     </>
   )
 }
