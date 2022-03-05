@@ -19,8 +19,10 @@ export const loginUser = async (loginObj) => {
     } = await axios.post(`${BASE_URL}/users/login`, loginObj)
     window.localStorage.setItem('token', token)
     return token
-  } catch (error) {
-    console.error(error)
+  } catch ({ response }) {
+    if (response.data.name === 'Error')
+      throw { name: 'BZZZT Incorrect login info', message: 'Try AGAIN!!' }
+    throw response.data
   }
 }
 
@@ -57,8 +59,8 @@ export const fetchActivities = async () => {
 export const registerUser = async (registerObj) => {
   try {
     await axios.post(`${BASE_URL}/users/register`, registerObj)
-  } catch (err) {
-    console.error(err)
+  } catch ({ response }) {
+    throw response.data
   }
 }
 
