@@ -5,7 +5,7 @@ export default function RoutineCards({ routines }) {
   return (
     <>
       {routines &&
-        routines.map((routine, idx) => {
+        routines.map((routine) => {
           return (
             <Card key={routine.id} className='d-flex flex-column'>
               <Card.Header className='fs-1'>{routine.name}</Card.Header>
