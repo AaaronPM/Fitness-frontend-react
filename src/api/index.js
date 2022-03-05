@@ -32,12 +32,16 @@ export const getUser = async (token) => {
 }
 
 export const createRoutines = async (token, routineObj) => {
-  const { data } = await axios.post(`${BASE_URL}/routines`, routineObj, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  return data
+  try {
+    const { data } = await axios.post(`${BASE_URL}/routines`, routineObj, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return data
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export const fetchActivities = async () => {
@@ -118,5 +122,20 @@ export const editRoutine = async (token, id, routineObj) => {
     console.log('res :>> ', res)
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const createActivity = async (token, activityObj) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/activities`, activityObj, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    console.log(res)
+  } catch ({ response }) {
+    if (response) {
+      throw response.data
+    }
   }
 }

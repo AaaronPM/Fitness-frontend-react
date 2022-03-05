@@ -1,11 +1,19 @@
+import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import CreateActivityModal from './CreateActivityModal'
 
-export default function Activities({ activities, user }) {
+export default function Activities({ activities, user, setActivities, token }) {
+  const [showModal, setShowModal] = useState(false)
   return (
     <div className='d-flex flex-column justify-content-center gap-3 mb-4'>
       {!user.id ? null : (
-        <Button className='w-50 align-self-center'>Create New Activity</Button>
+        <Button
+          className='w-50 align-self-center'
+          onClick={() => setShowModal(true)}
+        >
+          Create New Activity
+        </Button>
       )}
       <div className='d-flex flex-wrap justify-content-center gap-4'>
         {activities &&
@@ -21,6 +29,12 @@ export default function Activities({ activities, user }) {
             )
           })}
       </div>
+      <CreateActivityModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        token={token}
+        setActivities={setActivities}
+      />
     </div>
   )
 }
