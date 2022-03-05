@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import RoutineCards from './RoutineCards'
+import React from 'react'
 
 export default function Routines({ routines, token }) {
   const navigate = useNavigate()
@@ -12,12 +13,20 @@ export default function Routines({ routines, token }) {
         <Button
           bg='info'
           variant='info'
+          className='w-50 align-self-center'
           onClick={() => navigate('create-routine')}
         >
           Create New Routine
         </Button>
       )}
-      <RoutineCards routines={routines} />
+      {routines &&
+        routines.map((routine) => {
+          return (
+            <React.Fragment key={routine.id}>
+              <RoutineCards routine={routine} />
+            </React.Fragment>
+          )
+        })}
     </div>
   )
 }
