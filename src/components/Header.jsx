@@ -16,7 +16,7 @@ export default function Header({ token, setToken, setUser }) {
         className='mw-100 d-flex justify-content-between flex-sm-column flex-md-row'
         fixed='top'
       >
-        <Navbar.Brand className='m-0 px-4 mx-3 fs-1 rounded-pill fitness-title'>
+        <Navbar.Brand className='m-0 px-4 mx-3 fs-1 rounded-pill'>
           Fitness Tracker
         </Navbar.Brand>
         <Nav className='me-3 fs-4'>
