@@ -94,7 +94,7 @@ export const editRoutineActivity = async (
 ) => {
   try {
     const res = await axios.patch(
-      `${BASE_URL}/rountine_activities/${routineActivityId}`,
+      `${BASE_URL}/routine_activities/${routineActivityId}`,
       { count, duration },
       {
         headers: {
@@ -115,7 +115,7 @@ export const editRoutine = async (token, id, routineObj) => {
       routineObj,
       {
         headers: {
-          Authorization: `Bearer  ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     )

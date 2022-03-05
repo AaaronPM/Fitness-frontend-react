@@ -1,7 +1,8 @@
-import React from 'react'
+import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { deleteRoutineActivity, fetchRoutines } from '../api'
+import EditRoutineActivityModal from './EditRoutineActivityModal'
 
 export default function ActivityCards({
   activities,
@@ -10,6 +11,8 @@ export default function ActivityCards({
   token,
   setRoutines,
 }) {
+  const [showModal, setShowModal] = useState(false)
+
   const deleteRoutineActivityHandler = async (routineActivityId) => {
     try {
       await deleteRoutineActivity(token, routineActivityId)
@@ -47,7 +50,9 @@ export default function ActivityCards({
             </Card>
             {pathname === `/myRoutines/${routineId}` ? (
               <div className='d-flex w-100 gap-2'>
-                <Button className='w-50'>Edit</Button>
+                <Button className='w-50' onClick={() => setShowModal(true)}>
+                  Edit
+                </Button>
                 <Button
                   className='w-50'
                   onClick={() => deleteRoutineActivityHandler(activity.id)}
@@ -56,6 +61,13 @@ export default function ActivityCards({
                 </Button>
               </div>
             ) : null}
+            <EditRoutineActivityModal
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              activity={activity}
+              token={token}
+              setRoutines={setRoutines}
+            />
           </div>
         )
       })}

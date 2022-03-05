@@ -41,6 +41,7 @@ export default function Header({ token, setToken, setUser }) {
           {token ? (
             <Button
               id='btn-logout'
+              variant='danger'
               onClick={() => {
                 localStorage.removeItem('token')
                 setToken('')
