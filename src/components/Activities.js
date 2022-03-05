@@ -2,7 +2,6 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
 export default function Activities({ activities, user }) {
-  console.log('user :>> ', user)
   return (
     <div className='d-flex flex-column justify-content-center gap-3 mb-4'>
       {!user.id ? null : (

@@ -5,7 +5,6 @@ import RoutineCards from './RoutineCards'
 export default function MyRoutines({ routines, user }) {
   const [myRoutines, setMyRoutines] = useState([])
 
-  console.log('myRoutines :>> ', myRoutines)
   useEffect(() => {
     const filteredRoutines = routines.filter(
       (routine) => routine.creatorId === user.id
