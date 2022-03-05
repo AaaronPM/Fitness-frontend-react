@@ -63,7 +63,14 @@ function App() {
           />
           <Route
             path='/activities'
-            element={<Activities user={user} activities={activities} />}
+            element={
+              <Activities
+                user={user}
+                token={token}
+                activities={activities}
+                setActivities={setActivities}
+              />
+            }
           />
           <Route path='/login' element={<Login setToken={setToken} />} />
           <Route
