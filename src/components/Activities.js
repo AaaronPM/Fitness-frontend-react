@@ -6,7 +6,7 @@ import CreateActivityModal from './CreateActivityModal'
 export default function Activities({ activities, user, setActivities, token }) {
   const [showModal, setShowModal] = useState(false)
   return (
-    <div className='d-flex flex-column justify-content-center gap-3 mb-4'>
+    <div className='d-flex flex-column justify-content-center gap-3 mb-4 w-75'>
       {!user.id ? null : (
         <Button
           className='w-50 align-self-center'
@@ -15,7 +15,7 @@ export default function Activities({ activities, user, setActivities, token }) {
           Create New Activity
         </Button>
       )}
-      <div className='d-flex flex-wrap justify-content-center gap-4'>
+      <div className='d-flex flex-wrap justify-content-center gap-3'>
         {activities &&
           activities.map(({ id, name, description }) => {
             return (

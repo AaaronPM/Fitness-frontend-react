@@ -13,14 +13,14 @@ export default function MyRoutines({ routines, user }) {
   }, [routines, user])
 
   return (
-    <div>
+    <div className='d-flex flex-column align-items-center w-100 gap-3'>
       {myRoutines[0] ? (
         myRoutines.map((routine) => {
           return (
             <Link
               to={`${routine.id}`}
               key={routine.id}
-              className='text-decoration-none text-black'
+              className='text-decoration-none text-black w-50'
             >
               <RoutineCards routine={routine} />
             </Link>
