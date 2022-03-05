@@ -99,3 +99,16 @@ export const editRoutineActivity = async(token,routineActivityId,{count,duration
     console.error(error)
   }
 };
+
+export const editRoutine = async(token,id,routineObj) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/rountine_activities/${id}`,routineObj, {
+      headers:{
+        Authorization:`Bearer  ${token}`
+        
+      }})
+      console.log('res :>> ', res);
+  } catch (error) {
+    console.error(error)
+  }
+};
