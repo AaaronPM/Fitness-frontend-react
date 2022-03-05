@@ -20,8 +20,6 @@ export const loginUser = async (loginObj) => {
     window.localStorage.setItem('token', token)
     return token
   } catch ({ response }) {
-    if (response.data.name === 'Error')
-      throw { name: 'BZZZT Incorrect login info', message: 'Try AGAIN!!' }
     throw response.data
   }
 }
