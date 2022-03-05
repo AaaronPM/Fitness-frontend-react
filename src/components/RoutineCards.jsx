@@ -18,7 +18,10 @@ export default function RoutineCards({ routine }) {
             </Card.Text>
             {routine?.activities?.length > 0 ? (
               <div className='d-flex gap-2 justify-content-center'>
-                <ActivityCards activities={routine.activities} />
+                <ActivityCards
+                  activities={routine.activities}
+                  routineId={routine.id}
+                />
               </div>
             ) : (
               <div>

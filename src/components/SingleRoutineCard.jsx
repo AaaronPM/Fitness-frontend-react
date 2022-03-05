@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import ActivityCards from './ActivityCards'
@@ -14,7 +14,7 @@ export default function SingleRoutineCard({
   const [routine, setRoutine] = useState({})
   const { routineId } = useParams()
   const navigate = useNavigate()
-  console.log('token :>> ', token)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     const [currentRoutine] = routines.filter(
@@ -36,7 +36,7 @@ export default function SingleRoutineCard({
 
   return (
     <>
-      <Card className='d-flex flex-column'>
+      <Card className='d-flex flex-column w-75'>
         <Card.Header className='fs-1'>{routine.name}</Card.Header>
         <Card.Body>
           <Card.Title className='p-0 m-0 fw-bold'>Goal:</Card.Title>
@@ -51,7 +51,11 @@ export default function SingleRoutineCard({
           </Card.Text>
           {routine?.activities?.length > 0 ? (
             <div className='d-flex gap-2 justify-content-center'>
-              <ActivityCards activities={routine.activities} />
+              <ActivityCards
+                activities={routine.activities}
+                routineId={routine.id}
+                pathname={pathname}
+              />
             </div>
           ) : (
             <div>
