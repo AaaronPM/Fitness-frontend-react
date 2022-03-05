@@ -77,7 +77,7 @@ export const deleteRoutineActivity = async (token, routineActivityId) => {
       `${BASE_URL}/routine_activities/${routineActivityId}`,
       {
         headers: {
-          Authorization: `Bearer  ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     )
@@ -98,7 +98,7 @@ export const editRoutineActivity = async (
       { count, duration },
       {
         headers: {
-          Authorization: `Bearer  ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     )

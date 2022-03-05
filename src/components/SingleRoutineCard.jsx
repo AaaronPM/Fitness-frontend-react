@@ -55,6 +55,8 @@ export default function SingleRoutineCard({
                 activities={routine.activities}
                 routineId={routine.id}
                 pathname={pathname}
+                token={token}
+                setRoutines={setRoutines}
               />
             </div>
           ) : (

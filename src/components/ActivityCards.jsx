@@ -1,8 +1,25 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { deleteRoutineActivity, fetchRoutines } from '../api'
 
-export default function ActivityCards({ activities, routineId, pathname }) {
+export default function ActivityCards({
+  activities,
+  routineId,
+  pathname,
+  token,
+  setRoutines,
+}) {
+  const deleteRoutineActivityHandler = async (routineActivityId) => {
+    try {
+      await deleteRoutineActivity(token, routineActivityId)
+      const updateRoutines = await fetchRoutines()
+      setRoutines(updateRoutines)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <>
       {activities.map((activity) => {
@@ -31,7 +48,12 @@ export default function ActivityCards({ activities, routineId, pathname }) {
             {pathname === `/myRoutines/${routineId}` ? (
               <div className='d-flex w-100 gap-2'>
                 <Button className='w-50'>Edit</Button>
-                <Button className='w-50'>Delete</Button>
+                <Button
+                  className='w-50'
+                  onClick={() => deleteRoutineActivityHandler(activity.id)}
+                >
+                  Delete
+                </Button>
               </div>
             ) : null}
           </div>
