@@ -57,3 +57,45 @@ export const registerUser = async (registerObj) => {
     console.error(err)
   }
 }
+
+export const deleteRoutine = async(token,id) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/routines/${id}`,
+    {
+      headers:{
+        Authorization:`Bearer  ${token}`
+
+    }})
+    console.log('res :>> ', res);
+  } catch (error) {
+    console.error(error)
+  }
+};
+
+export const deleteRoutineActivity = async(token,routineActivityId) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/routine_activities/${routineActivityId}`,
+    {
+      headers:{
+        Authorization:`Bearer  ${token}`
+  
+    }})
+    console.log('res :>> ', res);
+  } catch (error) {
+    console.error(error)
+  }
+ 
+};
+
+export const editRoutineActivity = async(token,routineActivityId,{count,duration}) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/rountine_activities/${routineActivityId}`,{count,duration}, {
+      headers:{
+        Authorization:`Bearer  ${token}`
+        
+      }})
+      console.log('res :>> ', res);
+  } catch (error) {
+    console.error(error)
+  }
+};
