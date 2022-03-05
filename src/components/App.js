@@ -8,6 +8,7 @@ import Login from './Login'
 import Activities from './Activities'
 import CreateRoutine from './CreateRoutine'
 import MyRoutines from './MyRoutines'
+import SingleRoutineCard from './SingleRoutineCard'
 import { fetchActivities, fetchRoutines, getUser } from '../api'
 
 function App() {
@@ -67,6 +68,17 @@ function App() {
           <Route
             path='/myRoutines'
             element={<MyRoutines routines={routines} user={user} />}
+          />
+          <Route
+            path='/myRoutines/:routineId'
+            element={
+              <SingleRoutineCard
+                token={token}
+                routines={routines}
+                setRoutines={setRoutines}
+                user={user}
+              />
+            }
           />
         </Routes>
       </div>
