@@ -19,7 +19,7 @@ export default function Header({ token, setToken, setUser }) {
         <Navbar.Brand className='m-0 px-4 mx-3 fs-1 rounded-pill'>
           Fitness Tracker
         </Navbar.Brand>
-        <Nav className='me-3 fs-4'>
+        <Nav className='me-3 fs-4 align-items-center'>
           <LinkContainer to='/'>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
@@ -31,7 +31,7 @@ export default function Header({ token, setToken, setUser }) {
           </LinkContainer>
           {token ? (
             <LinkContainer to='myRoutines'>
-              <Nav.Link>My Routines</Nav.Link>
+              <Nav.Link className='text-center'>My Routines</Nav.Link>
             </LinkContainer>
           ) : (
             <LinkContainer to='login'>
@@ -40,6 +40,7 @@ export default function Header({ token, setToken, setUser }) {
           )}
           {token ? (
             <Button
+              id='btn-logout'
               onClick={() => {
                 localStorage.removeItem('token')
                 setToken('')
