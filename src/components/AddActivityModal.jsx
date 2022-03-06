@@ -32,12 +32,27 @@ export default function AddActivityModal({ show, onHide, token,activities, routi
   console.log('token :>> ', token);
   const closeModal = () => {
     onHide();
-    setCount(0);
+    setCount('');
     setIsError(false);
     setErrMessage("");
-    setDuration(0);
+    setDuration('');
   };
 
+  const countHandler = (e) => {
+    const regx = /[0-9\b\W]+$/
+
+    if (e === '' || regx.test(e)) {
+      setCount(e)
+    }
+  }
+
+  const durationHandler = (e) => {
+    const regx = /[0-9\b\W]+$/
+
+    if (e === '' || regx.test(e)) {
+      setDuration(e)
+    }
+  }
   return (
     <Modal
       show={show}
@@ -61,7 +76,7 @@ export default function AddActivityModal({ show, onHide, token,activities, routi
             <Form.Control
               type="text"
               value={count}
-              onChange={(e) => setCount(e.target.value)}
+              onChange={(e) => countHandler(e.target.value)}
             />
           </Form.Group>
           <Form.Group>
@@ -69,7 +84,7 @@ export default function AddActivityModal({ show, onHide, token,activities, routi
             <Form.Control
               type="text"
               value={duration}
-              onChange={(e) => setDuration(e.target.value)}
+              onChange={(e) => durationHandler(e.target.value)}
             />
           </Form.Group>
           <Form.Select onChange={e=>setActivityId(e.target.value)}>
