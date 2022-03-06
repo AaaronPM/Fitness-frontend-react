@@ -108,8 +108,9 @@ export const editRoutineActivity = async (
       }
     )
     console.log('res :>> ', res)
-  } catch (error) {
-    console.error(error)
+  } catch ({ response }) {
+    console.error(response.data)
+    throw response.data
   }
 }
 
@@ -121,12 +122,12 @@ export const editRoutine = async (token, id, routineObj) => {
       },
     })
     console.log('res :>> ', res)
-  } catch ({response}) {
+  } catch ({ response }) {
     console.error(response.data)
-    if(response.data.name==="error"){
+    if (response.data.name === 'error') {
       throw {
-        name:'Routine Name Exists',
-        message:'Routine with this name already Exists'
+        name: 'Routine Name Exists',
+        message: 'Routine with this name already Exists',
       }
     }
     throw response.data
@@ -148,17 +149,24 @@ export const createActivity = async (token, activityObj) => {
   }
 }
 
-export const createRoutineActivity = async(token,routineId,{activityId,count,duration}) => {
+export const createRoutineActivity = async (
+  token,
+  routineId,
+  { activityId, count, duration }
+) => {
   try {
-    const res = await axios.post(`${BASE_URL}/routines/${routineId}/activities`,{activityId,count,duration},
-    {headers:{
-      Authorization: `Bearer ${token}`,
-    }}
+    const res = await axios.post(
+      `${BASE_URL}/routines/${routineId}/activities`,
+      { activityId, count, duration },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
-    console.log('res :>> ', res);
-  } catch ({response}) {
+    console.log('res :>> ', res)
+  } catch ({ response }) {
     console.error(response.data)
     throw response.data
-    
   }
-};
+}

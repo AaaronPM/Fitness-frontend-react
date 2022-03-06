@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Popover from 'react-bootstrap/Popover'
+import Container from 'react-bootstrap/Container'
+import OverlayTrigger from 'react-bootstrap/Popover'
 import { createRoutines, fetchRoutines } from '../api'
-import { Container, OverlayTrigger } from 'react-bootstrap'
 
 export default function CreateRoutine({ token, setRoutines, routines }) {
   const [name, setName] = useState('')
@@ -27,7 +28,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
       setErrShow(true)
     }
   }
-  // routineNameError
+
   const popover = (
     <Popover
       id='popover-basic'
@@ -80,11 +81,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
           />
         </Form.Group>
         <Container className='d-flex gap-5 justify-content-center'>
-          <OverlayTrigger
-            show={errShow}
-            overlay={popover}
-            placement='bottom'
-          >
+          <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
             <Button
               variant='success'
               type='submit'
