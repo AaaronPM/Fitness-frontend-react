@@ -11,8 +11,7 @@ export default function Routines({ routines, token }) {
     <div className='d-flex gap-3 flex-column w-75'>
       {!token ? null : (
         <Button
-          bg='info'
-          variant='info'
+          variant='primary'
           className='w-50 align-self-center'
           onClick={() => navigate('create-routine')}
         >

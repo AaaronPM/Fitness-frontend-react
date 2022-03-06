@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import Header from './Header'
@@ -17,7 +17,6 @@ function App() {
   const [routines, setRoutines] = useState([])
   const [activities, setActivities] = useState([])
   const [token, setToken] = useState('')
-  const navigate = useNavigate()
 
   useEffect(() => {
     fetchRoutines().then((allRoutines) => setRoutines(allRoutines))
