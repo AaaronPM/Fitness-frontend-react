@@ -5,18 +5,24 @@ import Button from 'react-bootstrap/Button'
 import ActivityCards from './ActivityCards'
 import { deleteRoutine, fetchRoutines } from '../api'
 import EditRoutineModal from './EditRoutineModal'
+import AddActivityModal from './AddActivityModal'
 
 export default function SingleRoutineCard({
   token,
   routines,
   setRoutines,
   user,
+  activities
 }) {
   const [routine, setRoutine] = useState({})
   const [modalShow, setModalShow] = useState(false)
   const { routineId } = useParams()
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const [activityModalShow,setActivityModalShow]=useState(false)
+ 
+
+
 
   useEffect(() => {
     const [currentRoutine] = routines.filter(
@@ -36,6 +42,8 @@ export default function SingleRoutineCard({
     }
   }
 
+  if(!routine) return <h1>...Loading</h1>
+    
   return (
     <>
       <Card className='d-flex flex-column w-75'>
@@ -75,6 +83,8 @@ export default function SingleRoutineCard({
         setRoutines={setRoutines}
         token={token}
       />
+      <Button className='mt-3 w-75' onClick={()=>{setActivityModalShow(true)}} >Add an Activity To Your Routine</Button>
+      <AddActivityModal token={token} setRoutines={setRoutines} routineId={routine.id} activities={activities} show={activityModalShow} onHide={()=>{setActivityModalShow(false)}} />
     </>
   )
 }
