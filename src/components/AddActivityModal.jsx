@@ -1,58 +1,80 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { createRoutineActivity, fetchRoutines } from "../api";
-import { Container } from "react-bootstrap";
+import { Container, OverlayTrigger } from "react-bootstrap";
+import Popover from "react-bootstrap/Popover";
 
-
-export default function AddActivityModal({ show, onHide, token,activities, routineId,setRoutines}) {
-  const [count, setCount] = useState('');
-  const [duration, setDuration] = useState('');
+export default function AddActivityModal({
+  show,
+  onHide,
+  token,
+  activities,
+  routineId,
+  setRoutines,
+}) {
+  const [count, setCount] = useState("");
+  const [duration, setDuration] = useState("");
   const [errMessage, setErrMessage] = useState({});
-  const [isError, setIsError] = useState(false);
+  const [errShow, setErrShow] = useState(false);
   const [activityId, setActivityId] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const newRoutineActivity = { count, duration, activityId };
     try {
-      await createRoutineActivity(token,routineId, newRoutineActivity);
+      await createRoutineActivity(token, routineId, newRoutineActivity);
       const updatedRoutines = await fetchRoutines();
-      setRoutines(updatedRoutines)
-      onHide()
-      setCount('')
-      setDuration('')
+      setRoutines(updatedRoutines);
+      onHide();
+      setCount("");
+      setDuration("");
     } catch (err) {
       setErrMessage(err);
-      setIsError(true);
+      setErrShow(true);
       console.error(err);
     }
   };
-  console.log('token :>> ', token);
+  
   const closeModal = () => {
     onHide();
-    setCount('');
-    setIsError(false);
+    setCount("");
+    setErrShow(false);
     setErrMessage("");
-    setDuration('');
+    setDuration("");
   };
 
   const countHandler = (e) => {
-    const regx = /[0-9\b\W]+$/
+    const regx = /[0-9\b\W]+$/;
 
-    if (e === '' || regx.test(e)) {
-      setCount(e)
+    if (e === "" || regx.test(e)) {
+      setCount(e);
     }
-  }
+  };
 
   const durationHandler = (e) => {
-    const regx = /[0-9\b\W]+$/
+    const regx = /[0-9\b\W]+$/;
 
-    if (e === '' || regx.test(e)) {
-      setDuration(e)
+    if (e === "" || regx.test(e)) {
+      setDuration(e);
     }
-  }
+  };
+  const popover = (
+    <Popover id="popover-basic" className="bg-danger">
+      <Popover.Header as="h3" className="bg-danger text-light">
+        {errMessage.name}
+      </Popover.Header>
+      <Popover.Body className="text-light">{errMessage.message}</Popover.Body>
+    </Popover>
+  );
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setErrShow(false);
+    }, 5000);
+
+    return () => clearInterval(timerId);
+  });
   return (
     <Modal
       show={show}
@@ -74,7 +96,7 @@ export default function AddActivityModal({ show, onHide, token,activities, routi
           <Form.Group>
             <Form.Label>Add Activity Count</Form.Label>
             <Form.Control
-              type="text"
+             placeholder="Enter number of reps"
               value={count}
               onChange={(e) => countHandler(e.target.value)}
             />
@@ -82,28 +104,34 @@ export default function AddActivityModal({ show, onHide, token,activities, routi
           <Form.Group>
             <Form.Label>Add Activity Duration</Form.Label>
             <Form.Control
-              type="text"
+             placeholder="Enter number of Seconds"
               value={duration}
               onChange={(e) => durationHandler(e.target.value)}
             />
           </Form.Group>
-          <Form.Select onChange={e=>setActivityId(e.target.value)}>
-          <option>Activities</option>
-            {activities.map((activity)=>{
-              return <option key={activity.id} value={activity.id}>{activity.name}</option>
+          <Form.Select onChange={(e) => setActivityId(e.target.value)}>
+            <option>Activities</option>
+            {activities.map((activity) => {
+              return (
+                <option key={activity.id} value={activity.id}>
+                  {activity.name}
+                </option>
+              );
             })}
           </Form.Select>
           <Container className="d-flex justify-content-end gap-2 w-100">
-            <Button variant="success" type="submit">
-              Submit
-            </Button>
+            <OverlayTrigger show={errShow} overlay={popover} placement="bottom">
+              <Button variant="success" type="submit">
+                Submit
+              </Button>
+            </OverlayTrigger>
+
             <Button variant="danger" onClick={closeModal}>
               Close
             </Button>
           </Container>
         </Form>
       </Modal.Body>
-      
     </Modal>
   );
 }

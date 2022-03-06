@@ -84,7 +84,6 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
             show={errShow}
             overlay={popover}
             placement='bottom'
-            delay={10000}
           >
             <Button
               variant='success'
