@@ -39,8 +39,9 @@ export const createRoutines = async (token, routineObj) => {
       },
     })
     return data
-  } catch (err) {
-    console.error(err)
+  } catch ({ response }) {
+    console.error(response.data)
+    throw response.data
   }
 }
 
