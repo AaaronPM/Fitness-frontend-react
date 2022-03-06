@@ -121,8 +121,15 @@ export const editRoutine = async (token, id, routineObj) => {
       },
     })
     console.log('res :>> ', res)
-  } catch (error) {
-    console.error(error)
+  } catch ({response}) {
+    console.error(response.data)
+    if(response.data.name==="error"){
+      throw {
+        name:'Routine Name Exists',
+        message:'Routine with this name already Exists'
+      }
+    }
+    throw response.data
   }
 }
 
@@ -150,6 +157,8 @@ export const createRoutineActivity = async(token,routineId,{activityId,count,dur
     )
     console.log('res :>> ', res);
   } catch ({response}) {
+    console.error(response.data)
     throw response.data
+    
   }
 };
