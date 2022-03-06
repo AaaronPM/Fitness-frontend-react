@@ -140,3 +140,16 @@ export const createActivity = async (token, activityObj) => {
     }
   }
 }
+
+export const createRoutineActivity = async(token,routineId,{activityId,count,duration}) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/routines/${routineId}/activities`,{activityId,count,duration},
+    {headers:{
+      Authorization: `Bearer ${token}`,
+    }}
+    )
+    console.log('res :>> ', res);
+  } catch ({response}) {
+    throw response.data
+  }
+};
