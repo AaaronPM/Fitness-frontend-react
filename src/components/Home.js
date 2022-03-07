@@ -1,6 +1,19 @@
 import Button from 'react-bootstrap/Button'
 import LinkContainer from 'react-router-bootstrap/LinkContainer'
 
+const RNGColor = () => {
+  let RNG = Math.ceil(Math.random() * 5)
+  console.log('RNG', RNG)
+  const colorPairs = {
+    1: 'text-primary',
+    2: 'text-success',
+    3: 'text-danger',
+    4: 'text-warning',
+    5: 'text-info',
+  }
+  return `${colorPairs[RNG]}`
+}
+
 export default function Home({ user }) {
   return (
     <div>
@@ -20,7 +33,10 @@ export default function Home({ user }) {
         </div>
       ) : (
         <div className='bg-light text-secondary p-5 rounded m-3 shadow-lg'>
-          <h1 className='display-4'>Welcome back, {user.username}!</h1>
+          <h1 className='display-4'>
+            Welcome back,
+            <span className={`${RNGColor()}`}>{user.username}</span>!
+          </h1>
           <p className='lead'>Go Checkout all the great Routines!!!</p>
           <LinkContainer to='/routines'>
             <Button variant='outline-secondary' className='btn-lg'>
