@@ -29,15 +29,15 @@ export default function ActivityCards({
         return (
           <div
             key={activity.id}
-            className='d-flex justify-content-center flex-column gap-1'
+            className='d-flex justify-content-center flex-column border rounded p-1 shadow-sm border-light'
           >
-            <Card style={{ width: '14rem' }}>
+            <Card style={{ width: '14rem' }} className='flex-fill'>
               <Card.Header className='fw-bold mw-100'>
                 {activity.name}
               </Card.Header>
-              <Card.Body>
+              <Card.Body className='d-flex flex-column justify-content-center'>
                 <Card.Text className='p-0 m-1 fw-bold'>Description:</Card.Text>
-                <Card.Text className='p-0 mb-0 px-4 text-center'>
+                <Card.Text className='p-0 mb-0 px-1 text-center'>
                   {activity.description}
                 </Card.Text>
                 <Card.Text className='p-0 m-1'>
@@ -49,12 +49,13 @@ export default function ActivityCards({
               </Card.Body>
             </Card>
             {pathname === `/myRoutines/${routineId}` ? (
-              <div className='d-flex w-100 gap-2'>
+              <div className='d-flex w-100 gap-2 mt-2'>
                 <Button className='w-50' onClick={() => setShowModal(true)}>
                   Edit
                 </Button>
                 <Button
                   className='w-50'
+                  variant='danger'
                   onClick={() => deleteRoutineActivityHandler(activity.id)}
                 >
                   Delete

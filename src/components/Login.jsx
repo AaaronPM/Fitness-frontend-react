@@ -66,12 +66,7 @@ export default function Login({ setToken }) {
   })
 
   return (
-    <OverlayTrigger
-      show={errShow}
-      overlay={popover}
-      placement='bottom'
-      delay={10000}
-    >
+    <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
       <div className='d-flex gap-4 align-items-center'>
         <Form
           onSubmit={(e) => loginHandler(e)}

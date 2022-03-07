@@ -1,26 +1,41 @@
-import './Home.css'
+import Button from 'react-bootstrap/Button'
+import LinkContainer from 'react-router-bootstrap/LinkContainer'
 
-export default function Home() {
+export default function Home({ user }) {
   return (
     <div>
-      <h1 className='flex'>HOME</h1>
-      <div className='card'>
-        <div className='row g-0'>
-          <div className='col-5 col-sm-4'></div>
-          <div className='col-7 col-sm-8'>
-            <div className='card-body'>
-              <h5 className='card-title'>Card title</h5>
-              <p className='card-text'>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content.
-              </p>
-              <p className='card-text'>
-                <small className='text-muted'>Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
+      {!user.id ? (
+        <div className='bg-light text-secondary p-5 rounded-lg m-3 shadow-lg'>
+          <h1 className='display-4'>Welcome to Fitness Tracker!</h1>
+          <p className='lead'>
+            A simple application to share and find great work out routines!
+          </p>
+          <hr className='my-4' />
+          <p>Register or Login to start sharing your great WORKOUTS!</p>
+          <LinkContainer to='/login'>
+            <Button variant='outline-success' className='btn-lg'>
+              Login / Register
+            </Button>
+          </LinkContainer>
         </div>
-      </div>
+      ) : (
+        <div className='bg-light text-secondary p-5 rounded m-3 shadow-lg'>
+          <h1 className='display-4'>Welcome back, {user.username}!</h1>
+          <p className='lead'>Go Checkout all the great Routines!!!</p>
+          <LinkContainer to='/routines'>
+            <Button variant='outline-secondary' className='btn-lg'>
+              Routines
+            </Button>
+          </LinkContainer>
+          <hr className='my-4' />
+          <p>Register or Login to start sharing your great WORKOUTS!</p>
+          <LinkContainer to='/myRoutines'>
+            <Button variant='outline-primary' className='btn-lg btn-block'>
+              My Routines!!
+            </Button>
+          </LinkContainer>
+        </div>
+      )}
     </div>
   )
 }

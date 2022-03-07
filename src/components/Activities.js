@@ -2,9 +2,13 @@ import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import CreateActivityModal from './CreateActivityModal'
+import LoadingCards from './LoadingCards'
 
 export default function Activities({ activities, user, setActivities, token }) {
   const [showModal, setShowModal] = useState(false)
+
+  if (!activities) return <LoadingCards />
+
   return (
     <div className='d-flex flex-column justify-content-center gap-3 mb-4 w-75'>
       {!user.id ? null : (

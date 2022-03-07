@@ -3,40 +3,66 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import './Header.css'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export default function Header({ token, setToken, setUser }) {
   const navigate = useNavigate()
   return (
-    <Container className='head mw-100 p-0'>
+    <Container className='head mw-100 p-0 '>
       <Navbar
         bg='dark'
         variant='dark'
-        className='mw-100 d-flex justify-content-between flex-sm-column flex-md-row'
+        className='mw-100 d-flex justify-content-between flex-sm-column flex-column flex-md-row'
         fixed='top'
       >
-        <Navbar.Brand className='m-0 px-4 mx-3 fs-1 rounded-pill'>
-          Fitness Tracker
-        </Navbar.Brand>
-        <Nav className='me-3 fs-4 align-items-center'>
-          <LinkContainer to='/'>
-            <Nav.Link>Home</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to='routines'>
-            <Nav.Link>Routines</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to='activities'>
-            <Nav.Link>Activities</Nav.Link>
-          </LinkContainer>
+        <LinkContainer to='/'>
+          <Navbar.Brand className='m-0 px-4 mx-3 fs-1'>
+            Fitness Tracker
+          </Navbar.Brand>
+        </LinkContainer>
+        <Nav className='me-3 fs-4 align-items-center flex-column flex-sm-row'>
+          <NavLink
+            to='/'
+            className={(isActive) =>
+              'nav-link' + (!isActive ? ' unselected' : '')
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to='/routines'
+            className={(isActive) =>
+              'nav-link' + (!isActive ? ' unselected' : '')
+            }
+          >
+            Routines
+          </NavLink>
+          <NavLink
+            to='/activities'
+            className={(isActive) =>
+              'nav-link' + (!isActive ? ' unselected' : '')
+            }
+          >
+            Activities
+          </NavLink>
           {token ? (
-            <LinkContainer to='myRoutines'>
-              <Nav.Link className='text-center'>My Routines</Nav.Link>
-            </LinkContainer>
+            <NavLink
+              to='/myRoutines'
+              className={(isActive) =>
+                'nav-link text-center' + (!isActive ? ' unselected' : '')
+              }
+            >
+              My Routines
+            </NavLink>
           ) : (
-            <LinkContainer to='login'>
-              <Nav.Link>Login</Nav.Link>
-            </LinkContainer>
+            <NavLink
+              to='/login'
+              className={(isActive) =>
+                'nav-link' + (!isActive ? ' unselected' : '')
+              }
+            >
+              Login
+            </NavLink>
           )}
           {token ? (
             <Button

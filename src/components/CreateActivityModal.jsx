@@ -44,11 +44,16 @@ export default function EditRoutineModal({
   }
 
   const popover = (
-    <Popover id='popover-basic' className='bg-danger'>
-      <Popover.Header as='h3' className='bg-danger text-light'>
+    <Popover id='popover-basic' className='border-danger text-danger'>
+      <Popover.Header
+        as='h3'
+        className='border-danger text-danger bg-light fw-700'
+      >
         {errMessage.name}
       </Popover.Header>
-      <Popover.Body className='text-light'>{errMessage.message}</Popover.Body>
+      <Popover.Body className='text-danger fs-4'>
+        {errMessage.message}
+      </Popover.Body>
     </Popover>
   )
 
@@ -73,44 +78,43 @@ export default function EditRoutineModal({
           Create a New Activity
         </Modal.Title>
       </Modal.Header>
-      <OverlayTrigger
-        show={isError}
-        overlay={popover}
-        placement='bottom'
-        delay={10000}
-      >
-        <Modal.Body>
-          <Form
-            className='d-flex flex-column gap-3 p-3'
-            onSubmit={(e) => submitHandler(e)}
-          >
-            <Form.Group>
-              <Form.Label>Activity Name</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Activity Name'
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Activity Description</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Describe your activity'
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </Form.Group>
-            <Container className='d-flex justify-content-end gap-2 w-100'>
+      <Modal.Body>
+        <Form
+          className='d-flex flex-column gap-3 p-3'
+          onSubmit={(e) => submitHandler(e)}
+        >
+          <Form.Group>
+            <Form.Label>Activity Name</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Activity Name'
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Activity Description</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Describe your activity'
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
+          <Container className='d-flex justify-content-end gap-2 w-100'>
+            <OverlayTrigger
+              show={isError}
+              overlay={popover}
+              placement='bottom-end'
+            >
               <Button variant='success' type='submit'>
                 Create
               </Button>
-              <Button variant='danger' onClick={closeModal}>
-                Close
-              </Button>
-            </Container>
-          </Form>
-        </Modal.Body>
-      </OverlayTrigger>
+            </OverlayTrigger>
+            <Button variant='danger' onClick={closeModal}>
+              Close
+            </Button>
+          </Container>
+        </Form>
+      </Modal.Body>
     </Modal>
   )
 }

@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Popover from 'react-bootstrap/Popover'
-import Container from 'react-bootstrap/Container'
-import OverlayTrigger from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createRoutines, fetchRoutines } from '../api'
 
 export default function CreateRoutine({ token, setRoutines, routines }) {
@@ -30,10 +29,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
   }
 
   const popover = (
-    <Popover
-      id='popover-basic'
-      className='d-flex flex-column text-center bg-danger'
-    >
+    <Popover id='popover-basic' className='bg-danger'>
       <Popover.Header as='h3' className='bg-danger text-light'>
         {errMessage.name}
       </Popover.Header>
@@ -80,24 +76,20 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
             }}
           />
         </Form.Group>
-        <Container className='d-flex gap-5 justify-content-center'>
+        <Form.Group className='d-flex gap-5 justify-content-center'>
           <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
-            <Button
-              variant='success'
-              type='submit'
-              className='w-25 align-self-center'
-            >
+            <Button variant='success' type='submit' className='w-25'>
               Submit
             </Button>
           </OverlayTrigger>
           <Button
             variant='danger'
-            className='w-25 align-self-center'
+            className='w-25'
             onClick={() => navigate('/routines')}
           >
             Cancel
           </Button>
-        </Container>
+        </Form.Group>
       </Form>
     </div>
   )
