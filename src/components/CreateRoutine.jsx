@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Popover from 'react-bootstrap/Popover'
 import Container from 'react-bootstrap/Container'
-import OverlayTrigger from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createRoutines, fetchRoutines } from '../api'
 
 export default function CreateRoutine({ token, setRoutines, routines }) {
