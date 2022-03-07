@@ -67,10 +67,10 @@ export default function Login({ setToken }) {
 
   return (
     <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
-      <div className='d-flex gap-4 align-items-center'>
+      <div className='d-flex p-4 gap-4 align-items-center rounded shadow-sm'>
         <Form
           onSubmit={(e) => loginHandler(e)}
-          className='border-end border-secondary pe-4 py-4 d-flex gap-3 flex-column'
+          className='py-4 d-flex gap-3 flex-column'
         >
           <h1>Sign in</h1>
 
@@ -92,6 +92,7 @@ export default function Login({ setToken }) {
             Login
           </Button>
         </Form>
+        <div className='vr'></div>
         <Form
           onSubmit={(e) => registerHandler(e)}
           className='ms-0 d-flex gap-3 flex-column'

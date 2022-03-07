@@ -33,13 +33,13 @@ export default function Home({ user }) {
         </div>
       ) : (
         <div className='bg-light text-secondary p-5 rounded m-3 shadow-lg'>
-          <h1 className='display-4'>
+          <h1 className='display-4 mb-5 text-decoration-underline'>
             Welcome back,
-            <span className={`${RNGColor()}`}>{user.username}</span>!
+            <span className={`${RNGColor()} fw-bolder`}>{user.username}</span>!
           </h1>
           <p className='lead'>Go Checkout all the great Routines!!!</p>
           <LinkContainer to='/routines'>
-            <Button variant='outline-secondary' className='btn-lg'>
+            <Button variant='outline-secondary' className='btn-lg btn-block'>
               Routines
             </Button>
           </LinkContainer>
