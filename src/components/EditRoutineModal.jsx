@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { editRoutine, fetchRoutines } from '../api'
-import { Container, OverlayTrigger } from 'react-bootstrap'
 import Popover from 'react-bootstrap/Popover'
+import Container from 'react-bootstrap/Container'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import { editRoutine, fetchRoutines } from '../api'
 
 export default function EditRoutineModal({
   show,
@@ -15,8 +16,8 @@ export default function EditRoutineModal({
 }) {
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('')
-  const [errMessage,setErrMessage]=useState('')
-  const [errShow,setErrShow] = useState('')
+  const [errMessage, setErrMessage] = useState('')
+  const [errShow, setErrShow] = useState('')
 
   useEffect(() => {
     setGoal(routineGoal)
@@ -49,21 +50,21 @@ export default function EditRoutineModal({
   }
 
   const popover = (
-    <Popover id="popover-basic" className="bg-danger">
-      <Popover.Header as="h3" className="bg-danger text-light">
+    <Popover id='popover-basic' className='bg-danger'>
+      <Popover.Header as='h3' className='bg-danger text-light'>
         {errMessage.name}
       </Popover.Header>
-      <Popover.Body className="text-light">{errMessage.message}</Popover.Body>
+      <Popover.Body className='text-light'>{errMessage.message}</Popover.Body>
     </Popover>
-  );
+  )
 
   useEffect(() => {
     const timerId = setInterval(() => {
-      setErrShow(false);
-    }, 5000);
+      setErrShow(false)
+    }, 5000)
 
-    return () => clearInterval(timerId);
-  });
+    return () => clearInterval(timerId)
+  })
 
   return (
     <Modal
@@ -100,10 +101,10 @@ export default function EditRoutineModal({
             />
           </Form.Group>
           <Container className='d-flex justify-content-end gap-2 w-100'>
-            <OverlayTrigger show={errShow} overlay={popover} placement="bottom">
-            <Button variant='success' type='submit'>
-              Update
-            </Button>
+            <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
+              <Button variant='success' type='submit'>
+                Update
+              </Button>
             </OverlayTrigger>
             <Button variant='danger' onClick={closeModal}>
               Close

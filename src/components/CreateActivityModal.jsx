@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Popover from 'react-bootstrap/Popover'
+import Container from 'react-bootstrap/Container'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createActivity, fetchActivities } from '../api'
-import { Container, OverlayTrigger, Popover } from 'react-bootstrap'
 
 export default function EditRoutineModal({
   show,

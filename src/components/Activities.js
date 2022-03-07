@@ -10,7 +10,7 @@ export default function Activities({ activities, user, setActivities, token }) {
   if (!activities) return <LoadingCards />
 
   return (
-    <div className='d-flex flex-column justify-content-center gap-3 mb-4 w-75'>
+    <div className='d-flex flex-column justify-content-center gap-3 mb-4 mt-3 w-75'>
       {!user.id ? null : (
         <Button
           className='w-50 align-self-center'

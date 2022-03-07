@@ -16,9 +16,9 @@ const RNGColor = () => {
 
 export default function Home({ user }) {
   return (
-    <div>
+    <div className='d-flex justify-content-center mt-5 align-items-center'>
       {!user.id ? (
-        <div className='bg-light text-secondary p-5 rounded-lg m-3 shadow-lg'>
+        <div className='bg-light text-secondary p-5 rounded-lg shadow-lg'>
           <h1 className='display-4'>Welcome to Fitness Tracker!</h1>
           <p className='lead'>
             A simple application to share and find great work out routines!
@@ -32,7 +32,7 @@ export default function Home({ user }) {
           </LinkContainer>
         </div>
       ) : (
-        <div className='bg-light text-secondary p-5 rounded m-3 shadow-lg'>
+        <div className='bg-light text-secondary p-5 rounded mt-5 shadow-lg'>
           <h1 className='display-4 mb-5 text-decoration-underline'>
             Welcome back,
             <span className={`${RNGColor()} fw-bolder`}>{user.username}</span>!

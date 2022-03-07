@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { deleteRoutineActivity, fetchRoutines } from '../api'
 import EditRoutineActivityModal from './EditRoutineActivityModal'
+import { deleteRoutineActivity, fetchRoutines } from '../api'
 
 export default function ActivityCards({
   activities,

@@ -46,7 +46,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
   })
 
   return (
-    <div className='w-75'>
+    <div className='w-75 mt-3'>
       <Form
         onSubmit={(e) => submitHandler(e)}
         className='d-flex flex-column gap-3 p-3'

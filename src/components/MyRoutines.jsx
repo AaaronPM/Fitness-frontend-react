@@ -16,7 +16,7 @@ export default function MyRoutines({ routines, user }) {
   if (!routines) return <LoadingCards />
 
   return (
-    <div className='d-flex flex-column align-items-center w-100 gap-3'>
+    <div className='d-flex flex-column align-items-center w-100 gap-3 mt-3 '>
       {myRoutines &&
         myRoutines.map((routine) => {
           return (

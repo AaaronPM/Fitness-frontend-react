@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import ActivityCards from './ActivityCards'
+import Container from 'react-bootstrap/Container'
 import { deleteRoutine, fetchRoutines } from '../api'
+import ActivityCards from './ActivityCards'
 import EditRoutineModal from './EditRoutineModal'
 import AddActivityModal from './AddActivityModal'
-import { Container } from 'react-bootstrap'
 
 export default function SingleRoutineCard({
   token,
@@ -44,7 +44,7 @@ export default function SingleRoutineCard({
 
   return (
     <>
-      <Card className='d-flex flex-column w-75 shadow'>
+      <Card className='d-flex flex-column w-75 shadow mt-3 '>
         <Card.Header className='fs-1'>{routine.name}</Card.Header>
         <Card.Body>
           <Card.Title className='p-0 m-0 fw-bold'>Goal:</Card.Title>
