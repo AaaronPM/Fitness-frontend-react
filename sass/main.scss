@@ -1,0 +1,29 @@
+@import '../node_modules/bootstrap/scss/_functions';
+@import '../node_modules/bootstrap/scss/_variables';
+
+$custom-theme-color: (
+  'main': rgb(202, 127, 245),
+  'mainAlt': rgb(187, 74, 231),
+  'altLight': rgb(42, 230, 243),
+);
+
+$theme-colors: map-merge($custom-theme-color, $theme-colors);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, '$value');
+$utilities-colors: map-merge(
+  $theme-colors-rgb,
+  (
+    'black': to-rgb($black),
+    'white': to-rgb($white),
+    'body': to-rgb($body-color),
+  )
+);
+
+$utilities-text-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  '$key',
+  'text'
+);
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, '$key', 'bg');
+
+@import '../node_modules/bootstrap/scss/bootstrap';
