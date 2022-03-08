@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createRef } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Popover from 'react-bootstrap/Popover'
 import Container from 'react-bootstrap/Container'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createRoutineActivity, fetchRoutines } from '../api'
+import ErrPopover from './ErrPopover'
 
 export default function AddActivityModal({
   show,
@@ -20,6 +20,7 @@ export default function AddActivityModal({
   const [errMessage, setErrMessage] = useState({})
   const [errShow, setErrShow] = useState(false)
   const [activityId, setActivityId] = useState('')
+  const ref = createRef()
 
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -61,14 +62,7 @@ export default function AddActivityModal({
       setDuration(e)
     }
   }
-  const popover = (
-    <Popover id='popover-basic' className='bg-danger'>
-      <Popover.Header as='h3' className='bg-danger text-light'>
-        {errMessage.name}
-      </Popover.Header>
-      <Popover.Body className='text-light'>{errMessage.message}</Popover.Body>
-    </Popover>
-  )
+
   useEffect(() => {
     const timerId = setInterval(() => {
       setErrShow(false)
@@ -76,6 +70,7 @@ export default function AddActivityModal({
 
     return () => clearInterval(timerId)
   })
+
   return (
     <Modal
       show={show}
@@ -121,7 +116,11 @@ export default function AddActivityModal({
             })}
           </Form.Select>
           <Container className='d-flex justify-content-end gap-2 w-100'>
-            <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
+            <OverlayTrigger
+              show={errShow}
+              overlay={<ErrPopover ref={ref} errmessage={errMessage} />}
+              placement='bottom'
+            >
               <Button variant='success' type='submit'>
                 Submit
               </Button>

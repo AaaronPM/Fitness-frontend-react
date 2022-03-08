@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createRoutines, fetchRoutines } from '../api'
+import ErrPopover from './ErrPopover'
 
 export default function CreateRoutine({ token, setRoutines, routines }) {
   const [name, setName] = useState('')
@@ -13,6 +13,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
   const [errMessage, setErrMessage] = useState({})
   const [errShow, setErrShow] = useState(false)
   const navigate = useNavigate()
+  const ref = createRef()
 
   const submitHandler = async (e) => {
     try {
@@ -27,15 +28,6 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
       setErrShow(true)
     }
   }
-
-  const popover = (
-    <Popover id='popover-basic' className='bg-danger'>
-      <Popover.Header as='h3' className='bg-danger text-light'>
-        {errMessage.name}
-      </Popover.Header>
-      <Popover.Body className='text-light'>{errMessage.message}</Popover.Body>
-    </Popover>
-  )
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -77,7 +69,11 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
           />
         </Form.Group>
         <Form.Group className='d-flex gap-5 justify-content-center'>
-          <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
+          <OverlayTrigger
+            show={errShow}
+            overlay={<ErrPopover ref={ref} errmessage={errMessage} />}
+            placement='bottom'
+          >
             <Button variant='success' type='submit' className='w-25'>
               Submit
             </Button>

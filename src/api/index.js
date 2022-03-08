@@ -5,7 +5,6 @@ const BASE_URL = 'https://polar-brook-78087.herokuapp.com/api'
 export const fetchRoutines = async () => {
   try {
     const { data } = await axios.get(`${BASE_URL}/routines`)
-    console.log('Routines data :>> ', data)
     return data
   } catch (error) {
     console.error(error)
@@ -48,7 +47,6 @@ export const createRoutines = async (token, routineObj) => {
 export const fetchActivities = async () => {
   try {
     const { data } = await axios.get(`${BASE_URL}/activities`)
-    console.log('Activities data :>> ', data)
     return data
   } catch (err) {
     console.error(err)
@@ -65,12 +63,11 @@ export const registerUser = async (registerObj) => {
 
 export const deleteRoutine = async (token, id) => {
   try {
-    const res = await axios.delete(`${BASE_URL}/routines/${id}`, {
+    await axios.delete(`${BASE_URL}/routines/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log('res :>> ', res)
   } catch (error) {
     console.error(error)
   }
@@ -78,15 +75,11 @@ export const deleteRoutine = async (token, id) => {
 
 export const deleteRoutineActivity = async (token, routineActivityId) => {
   try {
-    const res = await axios.delete(
-      `${BASE_URL}/routine_activities/${routineActivityId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    console.log('res :>> ', res)
+    await axios.delete(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
   } catch (error) {
     console.error(error)
   }
@@ -98,7 +91,7 @@ export const editRoutineActivity = async (
   { count, duration }
 ) => {
   try {
-    const res = await axios.patch(
+    await axios.patch(
       `${BASE_URL}/routine_activities/${routineActivityId}`,
       { count, duration },
       {
@@ -107,7 +100,6 @@ export const editRoutineActivity = async (
         },
       }
     )
-    console.log('res :>> ', res)
   } catch ({ response }) {
     console.error(response.data)
     throw response.data
@@ -116,12 +108,11 @@ export const editRoutineActivity = async (
 
 export const editRoutine = async (token, id, routineObj) => {
   try {
-    const res = await axios.patch(`${BASE_URL}/routines/${id}`, routineObj, {
+    await axios.patch(`${BASE_URL}/routines/${id}`, routineObj, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log('res :>> ', res)
   } catch ({ response }) {
     console.error(response.data)
     if (response.data.name === 'error') {
@@ -136,12 +127,11 @@ export const editRoutine = async (token, id, routineObj) => {
 
 export const createActivity = async (token, activityObj) => {
   try {
-    const res = await axios.post(`${BASE_URL}/activities`, activityObj, {
+    await axios.post(`${BASE_URL}/activities`, activityObj, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log(res)
   } catch ({ response }) {
     if (response) {
       throw response.data
@@ -155,7 +145,7 @@ export const createRoutineActivity = async (
   { activityId, count, duration }
 ) => {
   try {
-    const res = await axios.post(
+    await axios.post(
       `${BASE_URL}/routines/${routineId}/activities`,
       { activityId, count, duration },
       {
@@ -164,7 +154,6 @@ export const createRoutineActivity = async (
         },
       }
     )
-    console.log('res :>> ', res)
   } catch ({ response }) {
     console.error(response.data)
     throw response.data

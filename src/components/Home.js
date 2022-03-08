@@ -3,7 +3,6 @@ import LinkContainer from 'react-router-bootstrap/LinkContainer'
 
 const RNGColor = () => {
   let RNG = Math.ceil(Math.random() * 5)
-  console.log('RNG', RNG)
   const colorPairs = {
     1: 'text-primary',
     2: 'text-success',

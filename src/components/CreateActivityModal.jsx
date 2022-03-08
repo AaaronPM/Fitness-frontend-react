@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createRef } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Popover from 'react-bootstrap/Popover'
 import Container from 'react-bootstrap/Container'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createActivity, fetchActivities } from '../api'
+import ErrPopover from './ErrPopover'
 
 export default function EditRoutineModal({
   show,
@@ -17,6 +17,7 @@ export default function EditRoutineModal({
   const [description, setDescription] = useState('')
   const [errMessage, setErrMessage] = useState({})
   const [isError, setIsError] = useState(false)
+  const ref = createRef()
 
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -44,20 +45,6 @@ export default function EditRoutineModal({
     setErrMessage('')
     setDescription('')
   }
-
-  const popover = (
-    <Popover id='popover-basic' className='border-danger text-danger'>
-      <Popover.Header
-        as='h3'
-        className='border-danger text-danger bg-light fw-700'
-      >
-        {errMessage.name}
-      </Popover.Header>
-      <Popover.Body className='text-danger fs-4'>
-        {errMessage.message}
-      </Popover.Body>
-    </Popover>
-  )
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -104,7 +91,7 @@ export default function EditRoutineModal({
           <Container className='d-flex justify-content-end gap-2 w-100'>
             <OverlayTrigger
               show={isError}
-              overlay={popover}
+              overlay={<ErrPopover ref={ref} errmessage={errMessage} />}
               placement='bottom-end'
             >
               <Button variant='success' type='submit'>
