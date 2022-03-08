@@ -19,39 +19,39 @@ function App() {
   const [token, setToken] = useState('')
 
   useEffect(() => {
-    fetchRoutines().then((allRoutines) => setRoutines(allRoutines));
-    fetchActivities().then((allActivities) => setActivities(allActivities));
-  }, []);
+    fetchRoutines().then((allRoutines) => setRoutines(allRoutines))
+    fetchActivities().then((allActivities) => setActivities(allActivities))
+  }, [])
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
+    if (localStorage.getItem('token')) {
+      setToken(localStorage.getItem('token'))
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    userHandler(token);
-  }, [token]);
+    userHandler(token)
+  }, [token])
 
   const userHandler = async (token) => {
     if (token) {
-      const user = await getUser(token);
-      setUser(user);
+      const user = await getUser(token)
+      setUser(user)
     }
-  };
+  }
 
   return (
-    <div className="App">
+    <div className='App'>
       <Header token={token} setToken={setToken} setUser={setUser} />
-      <div className="content-container d-flex align-items-center mb-5 flex-column">
+      <div className='content-container d-flex align-items-center mb-5 flex-column'>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path='/' element={<Home user={user} />} />
           <Route
-            path="/routines"
+            path='/routines'
             element={<Routines token={token} routines={routines} />}
           />
           <Route
-            path="/routines/create-routine"
+            path='/routines/create-routine'
             element={
               <CreateRoutine
                 routines={routines}
@@ -61,7 +61,7 @@ function App() {
             }
           />
           <Route
-            path="/activities"
+            path='/activities'
             element={
               <Activities
                 user={user}
@@ -71,13 +71,13 @@ function App() {
               />
             }
           />
-          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route path='/login' element={<Login setToken={setToken} />} />
           <Route
-            path="/myRoutines"
+            path='/myRoutines'
             element={<MyRoutines routines={routines} user={user} />}
           />
           <Route
-            path="/myRoutines/:routineId"
+            path='/myRoutines/:routineId'
             element={
               <SingleRoutineCard
                 token={token}
@@ -91,7 +91,7 @@ function App() {
         </Routes>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

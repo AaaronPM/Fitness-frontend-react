@@ -1,14 +1,16 @@
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import RoutineCards from './RoutineCards'
-import React from 'react'
+import LoadingCards from './LoadingCards'
 
 export default function Routines({ routines, token }) {
   const navigate = useNavigate()
-  if (!routines) return <h1>Loading</h1>
+
+  if (!routines) return <LoadingCards />
 
   return (
-    <div className='d-flex gap-3 flex-column w-75'>
+    <div className='d-flex gap-3 flex-column w-75 mt-3'>
       {!token ? null : (
         <Button
           variant='primary'
