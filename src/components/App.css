@@ -1,8 +1,32 @@
 .content-container {
-  margin-top: 150px;
+  margin-top: 70px;
   background-color: #f0f2f5;
 }
+.App {
+  height: 100%;
+}
 
-html {
-  background-color: #f0f2f5;
+#xs-nav {
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  #lg-nav {
+    display: none;
+  }
+
+  #xs-nav {
+    display: flex;
+  }
+
+  .content-container {
+    margin-top: 0;
+    padding-top: 20px;
+  }
+
+  #offcanvasNavbar {
+    height: 320px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
 }

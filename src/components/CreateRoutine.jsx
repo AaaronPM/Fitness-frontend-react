@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Popover from 'react-bootstrap/Popover'
-import Container from 'react-bootstrap/Container'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { createRoutines, fetchRoutines } from '../api'
+import ErrPopover from './ErrPopover'
 
 export default function CreateRoutine({ token, setRoutines, routines }) {
   const [name, setName] = useState('')
@@ -14,6 +13,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
   const [errMessage, setErrMessage] = useState({})
   const [errShow, setErrShow] = useState(false)
   const navigate = useNavigate()
+  const ref = createRef()
 
   const submitHandler = async (e) => {
     try {
@@ -29,18 +29,6 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
     }
   }
 
-  const popover = (
-    <Popover
-      id='popover-basic'
-      className='d-flex flex-column text-center bg-danger'
-    >
-      <Popover.Header as='h3' className='bg-danger text-light'>
-        {errMessage.name}
-      </Popover.Header>
-      <Popover.Body className='text-light'>{errMessage.message}</Popover.Body>
-    </Popover>
-  )
-
   useEffect(() => {
     const timerId = setInterval(() => {
       setErrShow(false)
@@ -50,7 +38,7 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
   })
 
   return (
-    <div className='w-75'>
+    <div className='w-75 mt-3'>
       <Form
         onSubmit={(e) => submitHandler(e)}
         className='d-flex flex-column gap-3 p-3'
@@ -80,24 +68,24 @@ export default function CreateRoutine({ token, setRoutines, routines }) {
             }}
           />
         </Form.Group>
-        <Container className='d-flex gap-5 justify-content-center'>
-          <OverlayTrigger show={errShow} overlay={popover} placement='bottom'>
-            <Button
-              variant='success'
-              type='submit'
-              className='w-25 align-self-center'
-            >
+        <Form.Group className='d-flex gap-5 justify-content-center'>
+          <OverlayTrigger
+            show={errShow}
+            overlay={<ErrPopover ref={ref} errmessage={errMessage} />}
+            placement='bottom'
+          >
+            <Button variant='success' type='submit' className='w-25'>
               Submit
             </Button>
           </OverlayTrigger>
           <Button
             variant='danger'
-            className='w-25 align-self-center'
+            className='w-25'
             onClick={() => navigate('/routines')}
           >
             Cancel
           </Button>
-        </Container>
+        </Form.Group>
       </Form>
     </div>
   )

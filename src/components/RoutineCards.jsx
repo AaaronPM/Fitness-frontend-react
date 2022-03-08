@@ -5,7 +5,7 @@ export default function RoutineCards({ routine }) {
   return (
     <>
       {routine && (
-        <Card className='d-flex flex-column'>
+        <Card className='d-flex flex-column '>
           <Card.Header className='fs-1'>{routine.name}</Card.Header>
           <Card.Body>
             <Card.Title className='p-0 m-0 fw-bold'>Goal:</Card.Title>
@@ -17,7 +17,7 @@ export default function RoutineCards({ routine }) {
               Activities:
             </Card.Text>
             {routine?.activities?.length > 0 ? (
-              <div className='d-flex gap-2 justify-content-center'>
+              <div className='d-flex gap-2 justify-content-center flex-wrap'>
                 <ActivityCards
                   activities={routine.activities}
                   routineId={routine.id}

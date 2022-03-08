@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import ActivityCards from './ActivityCards'
+import Container from 'react-bootstrap/Container'
 import { deleteRoutine, fetchRoutines } from '../api'
+import ActivityCards from './ActivityCards'
 import EditRoutineModal from './EditRoutineModal'
 import AddActivityModal from './AddActivityModal'
 
@@ -12,17 +13,14 @@ export default function SingleRoutineCard({
   routines,
   setRoutines,
   user,
-  activities
+  activities,
 }) {
   const [routine, setRoutine] = useState({})
   const [modalShow, setModalShow] = useState(false)
   const { routineId } = useParams()
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const [activityModalShow,setActivityModalShow]=useState(false)
- 
-
-
+  const [activityModalShow, setActivityModalShow] = useState(false)
 
   useEffect(() => {
     const [currentRoutine] = routines.filter(
@@ -42,11 +40,11 @@ export default function SingleRoutineCard({
     }
   }
 
-  if(!routine) return <h1>...Loading</h1>
-    
+  if (!routine) return <h1>...Loading</h1>
+
   return (
     <>
-      <Card className='d-flex flex-column w-75'>
+      <Card className='d-flex flex-column w-75 shadow mt-3 '>
         <Card.Header className='fs-1'>{routine.name}</Card.Header>
         <Card.Body>
           <Card.Title className='p-0 m-0 fw-bold'>Goal:</Card.Title>
@@ -54,13 +52,17 @@ export default function SingleRoutineCard({
           <Card.Text className='fst-italic'>
             Routine Creator: {routine.creatorName}
           </Card.Text>
-          <Button onClick={() => setModalShow(true)}>Edit</Button>
-          <Button onClick={deleteHandler}>Delete</Button>
+          <Container className='d-flex gap-3'>
+            <Button onClick={() => setModalShow(true)}>Edit</Button>
+            <Button variant='danger' onClick={deleteHandler}>
+              Delete
+            </Button>
+          </Container>
           <Card.Text className='p-0 m-0 mb-2 fs-5 fw-bold'>
             Activities:
           </Card.Text>
           {routine?.activities?.length > 0 ? (
-            <div className='d-flex gap-2 justify-content-center'>
+            <div className='d-flex gap-2 justify-content-center flex-wrap'>
               <ActivityCards
                 activities={routine.activities}
                 routineId={routine.id}
@@ -83,8 +85,24 @@ export default function SingleRoutineCard({
         setRoutines={setRoutines}
         token={token}
       />
-      <Button className='mt-3 w-75' onClick={()=>{setActivityModalShow(true)}} >Add an Activity To Your Routine</Button>
-      <AddActivityModal token={token} setRoutines={setRoutines} routineId={routine.id} activities={activities} show={activityModalShow} onHide={()=>{setActivityModalShow(false)}} />
+      <Button
+        className='mt-3 w-50'
+        onClick={() => {
+          setActivityModalShow(true)
+        }}
+      >
+        Add an Activity To Your Routine
+      </Button>
+      <AddActivityModal
+        token={token}
+        setRoutines={setRoutines}
+        routineId={routine.id}
+        activities={activities}
+        show={activityModalShow}
+        onHide={() => {
+          setActivityModalShow(false)
+        }}
+      />
     </>
   )
 }
